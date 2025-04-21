@@ -1,0 +1,203 @@
+{
+  "syncTasks": [
+    {
+      "taskName": "MySQLToSQLServer",
+      "sourceDb": {
+        "type": "MySQL",
+        "connectionString": "Server=47.95.236.188;Database=tianbabadb;Uid=root;Pwd=gaoshi@2021;SslMode=None;port=8002;",
+        "providerName": "MySql.Data.MySqlClient"
+      },
+      "targetDb": {
+        "type": "SQLServer",
+        "connectionString": "server=47.95.236.188;database=XBHPShop;user id=GeduUser;password=cnuGedu_1230;min pool size=4;max pool size=4;Encrypt=False",
+        "providerName": "Microsoft.Data.SqlClient"
+      },
+      "tableMappings": [
+        {
+          "sourceTable": "customers",
+          "targetTable": "Customers",
+          "primaryKey": "id",
+          "trackingColumn": "last_updated",
+          "columnMappings": [
+            {
+              "source": "id",
+              "target": "CustomerId",
+              "isPrimaryKey": true
+            },
+            {
+              "source": "name",
+              "target": "CustomerName"
+            },
+            {
+              "source": "email",
+              "target": "Email"
+            },
+            {
+              "source": "phone",
+              "target": "PhoneNumber"
+            },
+            {
+              "source": "last_updated",
+              "target": "LastUpdated"
+            }
+          ]
+        } //,
+        //{
+        //  "sourceTable": "orders",
+        //  "targetTable": "Orders",
+        //  "primaryKey": "order_id",
+        //  "trackingColumn": "modified_date",
+        //  "columnMappings": [
+        //    { "source": "order_id", "target": "OrderId", "isPrimaryKey": true },
+        //    { "source": "customer_id", "target": "CustomerId" },
+        //    { "source": "order_date", "target": "OrderDate" },
+        //    { "source": "total_amount", "target": "TotalAmount" },
+        //    { "source": "status", "target": "Status" },
+        //    { "source": "modified_date", "target": "ModifiedDate" }
+        //  ]
+        //}
+      ],
+      "syncSettings": {
+        "batchSize": 1000,
+        "syncInterval": 300,
+        "retryCount": 3,
+        "retryDelaySeconds": 10,
+        "syncMethod": "Timestamp",
+        "cdcSettings": {
+          "enableCdc": false,
+          "captureInstance": "",
+          "useLegacySqlServerCdc": false,
+          "customCdcQuery": ""
+        }
+      }
+    }
+    //,
+    //{
+    //  "taskName": "SQLServerToMySQL",
+    //  "sourceDb": {
+    //    "type": "SQLServer",
+    //    "connectionString": "Server=localhost;Database=sourcedb;User Id=sa;Password=password;TrustServerCertificate=True;",
+    //    "providerName": "Microsoft.Data.SqlClient"
+    //  },
+    //  "targetDb": {
+    //    "type": "MySQL",
+    //    "connectionString": "Server=localhost;Database=targetdb;Uid=root;Pwd=password;",
+    //    "providerName": "MySql.Data.MySqlClient"
+    //  },
+    //  "tableMappings": [
+    //    {
+    //      "sourceTable": "Products",
+    //      "targetTable": "products",
+    //      "primaryKey": "ProductId",
+    //      "trackingColumn": "LastModified",
+    //      "columnMappings": [
+    //        { "source": "ProductId", "target": "product_id", "isPrimaryKey": true },
+    //        { "source": "ProductName", "target": "name" },
+    //        { "source": "Price", "target": "price" },
+    //        { "source": "Category", "target": "category" },
+    //        { "source": "LastModified", "target": "last_modified" }
+    //      ]
+    //    }
+    //  ],
+    //  "syncSettings": {
+    //    "batchSize": 500,
+    //    "syncInterval": 600,
+    //    "retryCount": 3,
+    //    "retryDelaySeconds": 15,
+    //    "syncMethod": "Timestamp"
+    //  }
+    //},
+    //{
+    //  "taskName": "SQLServerCdcSync",
+    //  "sourceDb": {
+    //    "type": "SQLServer",
+    //    "connectionString": "Server=localhost;Database=sourcedb;User Id=sa;Password=password;TrustServerCertificate=True;",
+    //    "providerName": "Microsoft.Data.SqlClient"
+    //  },
+    //  "targetDb": {
+    //    "type": "SQLServer",
+    //    "connectionString": "Server=localhost;Database=targetdb;User Id=sa;Password=password;TrustServerCertificate=True;",
+    //    "providerName": "Microsoft.Data.SqlClient"
+    //  },
+    //  "tableMappings": [
+    //    {
+    //      "sourceTable": "Customers",
+    //      "targetTable": "CustomersSync",
+    //      "primaryKey": "CustomerId",
+    //      "syncMethod": "CDC",
+    //      "columnMappings": [
+    //        { "source": "CustomerId", "target": "CustomerId", "isPrimaryKey": true },
+    //        { "source": "CustomerName", "target": "CustomerName" },
+    //        { "source": "Email", "target": "Email" },
+    //        { "source": "Phone", "target": "Phone" },
+    //        { "source": "Address", "target": "Address" }
+    //      ]
+    //    }
+    //  ],
+    //  "syncSettings": {
+    //    "batchSize": 1000,
+    //    "syncInterval": 60,
+    //    "retryCount": 3,
+    //    "retryDelaySeconds": 5,
+    //    "syncMethod": "CDC",
+    //    "cdcSettings": {
+    //      "enableCdc": true,
+    //      "captureInstance": "dbo_Customers",
+    //      "useLegacySqlServerCdc": false,
+    //      "customCdcQuery": ""
+    //    }
+    //  }
+    //},
+    //{
+    //  "taskName": "LegacySQLServerCdcSync",
+    //  "sourceDb": {
+    //    "type": "SQLServer",
+    //    "connectionString": "Server=legacy-server;Database=sourcedb;User Id=sa;Password=password;TrustServerCertificate=True;",
+    //    "providerName": "Microsoft.Data.SqlClient"
+    //  },
+    //  "targetDb": {
+    //    "type": "SQLServer",
+    //    "connectionString": "Server=localhost;Database=targetdb;User Id=sa;Password=password;TrustServerCertificate=True;",
+    //    "providerName": "Microsoft.Data.SqlClient"
+    //  },
+    //  "tableMappings": [
+    //    {
+    //      "sourceTable": "Orders",
+    //      "targetTable": "OrdersSync",
+    //      "primaryKey": "OrderId",
+    //      "syncMethod": "CDC",
+    //      "columnMappings": [
+    //        { "source": "OrderId", "target": "OrderId", "isPrimaryKey": true },
+    //        { "source": "CustomerId", "target": "CustomerId" },
+    //        { "source": "OrderDate", "target": "OrderDate" },
+    //        { "source": "TotalAmount", "target": "TotalAmount" },
+    //        { "source": "Status", "target": "Status" }
+    //      ]
+    //    }
+    //  ],
+    //  "syncSettings": {
+    //    "batchSize": 500,
+    //    "syncInterval": 120,
+    //    "retryCount": 3,
+    //    "retryDelaySeconds": 10,
+    //    "syncMethod": "CDC",
+    //    "cdcSettings": {
+    //      "enableCdc": true,
+    //      "captureInstance": "dbo_Orders",
+    //      "useLegacySqlServerCdc": true,
+    //      "customCdcQuery": ""
+    //    }
+    //  }
+    //}
+    //    "syncMethod": "RowVersion"
+    //  }
+    //}
+  ],
+  "globalSettings": {
+    "logLevel": "Information",
+    "logFilePath": "logs/dbsync.log",
+    "enableDetailedLogging": true,
+    "maxLogFileSizeMB": 10,
+    "maxLogFileCount": 5
+  }
+}
